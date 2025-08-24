@@ -130,6 +130,16 @@
             font-family: 'Rustic Roadway', cursive;
         }
 
+        /* Responsive font size for the main heading */
+        .hero-title {
+            font-size: 3rem; /* Default for larger screens */
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem; /* Smaller font for mobile devices */
+            }
+        }
+
         /* Light/Dark Theme Styles */
         body.dark-theme {
             background-color: #1a202c;
@@ -308,7 +318,7 @@
 
         <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
             <div class="slide-in-left max-w-4xl w-full">
-                <h1 class="text-5xl md:text-6xl font-bold mb-4 rustic-font color-on-theme tracking-widest uppercase">welcome to my portfolio</h1>
+                <h1 class="hero-title font-bold mb-4 rustic-font color-on-theme tracking-widest uppercase">welcome to my portfolio</h1>
                 <div class="floating-card bg-card-on-theme p-8 rounded-2xl w-full">
                     <span class="small-tag mb-4 inline-block color-on-theme">Rebarshop Drawing & BBS</span>
                     <h2 class="text-2xl font-semibold color-on-theme mb-4">Rebarshop Expert</h2>
