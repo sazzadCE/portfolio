@@ -3,149 +3,276 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Rebarshop Expart — Portfolio</title>
+    <title>Rebarshop Expert — Portfolio</title>
     <meta name="description" content="Rebarshop Drawings, BBS, Tekla, SketchUp/V-Ray, Rebar Takeoff & Estimating — Portfolio.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root{ --dark-navy:#020a14; --navy:#0b1526; --light-navy:#122135; --slate:#9fb0d6; --muted:#8ea0d8; --white:#eaf2ff; --green:#64ffda; /* accent */ --blue:#56c2ff; --orange:#ff9a3c; /* welding glow */ --glass: rgba(255,255,255,0.04); --radius:18px; --max:1200px; --shadow:0 24px 60px rgba(0,0,0,.5); }
-        html,body{height:100%}
-        body{ font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(86,194,255,0.03), transparent), linear-gradient(180deg,var(--dark-navy),var(--navy)); color:var(--slate); margin:0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-x:hidden; }
-        
-        /* New Blueprint Animation Layer */
-        .blueprint-animation-layer {
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rustic+Roadway&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .floating-card {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .floating-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .wave-animation {
+            animation: wave 6s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        .parallax-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+        .slide-in-left.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 1.4s ease-out, transform 1.4s ease-out;
+        }
+        .slide-in-right.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        header.header {
             position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background-color: var(--dark-navy);
+            inset: 0 0 auto 0;
+            height: 72px;
+            z-index: 60;
             display: flex;
             align-items: center;
-            justify-content: center;
-            opacity: 1;
-            transition: opacity 1s ease-out, visibility 1s ease-out;
-            visibility: visible;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: background-color 0.5s, color 0.5s;
         }
-        .blueprint-animation-layer.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            justify-content: space-between;
+            width: 100%;
         }
-        .blueprint-container {
-            width: 90%;
-            max-width: 900px;
-            height: 50%;
+        .logo {
+            font-weight: 800;
+            color: #1f2937;
+            font-size: 1.15rem;
+            letter-spacing: .6px;
+        }
+        .desktop-nav a {
+            margin-left: 12px;
+            color: #4b5563;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all .2s;
             position: relative;
         }
-        .blueprint-grid {
+        .desktop-nav a:hover {
+            color: #64ffda;
+            transform: translateY(-3px);
+        }
+        .desktop-nav a::after {
+            content: '';
             position: absolute;
-            inset: 0;
-            opacity: 0;
-            background-image:
-                linear-gradient(to right, #001f3f 1px, transparent 1px),
-                linear-gradient(to bottom, #001f3f 1px, transparent 1px);
-            background-size: 20px 20px;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: #64ffda;
+            transition: width 0.3s ease, left 0.3s ease;
         }
-        .blueprint-svg {
-            position: absolute;
-            inset: 0;
+        .desktop-nav a:hover::after {
+            width: 100%;
+            left: 0;
         }
-        .blueprint-svg .line {
-            stroke: var(--green);
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-        }
-        .blueprint-svg .dimension-line {
-            stroke: var(--blue);
-            stroke-width: 1;
-            stroke-dasharray: 100;
-            stroke-dashoffset: 100;
-        }
-        .blueprint-svg .text {
-            font-family: 'Fira Code', monospace;
-            font-size: 16px;
-            fill: var(--blue);
-            opacity: 0;
-        }
-        .blueprint-svg .glow {
-            filter: drop-shadow(0 0 4px var(--green)) drop-shadow(0 0 8px var(--green));
+        @media (max-width:768px){ .desktop-nav{display:none} .hamburger{display:block} }
+        .hamburger > div {width: 24px; height: 3px; background-color: #333; margin: 4px 0;}
+
+        .rustic-font {
+            font-family: 'Rustic Roadway', cursive;
         }
 
-        /* Original styles kept below */
-        .cursor{position:fixed;left:0;top:0;width:22px;height:22px;border-radius:999px;border:2px solid var(--green);transform:translate(-50%,-50%);pointer-events:none;z-index:9998;transition:width .18s,height .18s,background .18s,transform .12s}
-        .cursor.grow{transform:translate(-50%,-50%) scale(2.6);background:rgba(100,255,218,.12);border-color:transparent}
-        header.header{position:fixed;inset:0 0 auto 0;height:72px;z-index:60;display:flex;align-items:center}
-        .nav-inner{max-width:var(--max);margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:18px;justify-content:space-between}
-        .logo{font-weight:800;color:var(--white);font-size:1.15rem;letter-spacing:.6px}
-        .desktop-nav a{margin-left:12px;color:var(--muted);padding:8px 12px;border-radius:12px;transition:all .2s}
-        .desktop-nav a:hover{color:var(--green);transform:translateY(-3px)}
-        @media (max-width:768px){ .desktop-nav{display:none} .hamburger{display:block} }
-        #hero{min-height:100vh;display:flex;align-items:center;padding-top:72px;position:relative;overflow:hidden}
-        #hero .wrap{max-width:1100px;margin:0 auto;padding:36px}
-        .lead-ghost{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.02);font-weight:700}
-        .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:32px;box-shadow:var(--shadow);width:100%}
-        .small-tag{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(100,255,218,.06);border:1px solid rgba(100,255,218,.12);color:var(--green);font-weight:700}
-        .section-typed{font-weight:900;background:linear-gradient(90deg,var(--orange),#ffd69a 30%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:clamp(1.6rem,2.8vw,2.4rem);margin-bottom:14px}
-        .glass-card{background:var(--glass);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,.04);box-shadow:0 16px 40px rgba(0,0,0,.45)}
-        .project-thumb{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.06);background:linear-gradient(135deg,#081025, #0b1530)}
-        .reveal{opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.9,.2,1)}
-        .reveal.show{opacity:1;transform:none}
-        .beam{position:absolute;height:2px;background:linear-gradient(90deg,var(--orange),var(--blue));opacity:.28;filter:blur(.2px)}
-        .side-elements{display:none}
-        @media(min-width:1024px){ .side-elements{display:block} .left-side{position:fixed;left:36px;bottom:72px} .right-side{position:fixed;right:36px;bottom:72px} }
-        .muted{color:var(--muted)}
-        a.btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--orange),#ffd69a);color:#241100;font-weight:700}
-        footer{padding:28px 24px;text-align:center;color:var(--muted)}
-        .typer::after{content:attr(data-caret);margin-left:6px;color:#ffd9a6;animation:blink .9s steps(1) infinite}
-        @keyframes blink{50%{opacity:0}}
-        :root.show-focus a:focus{outline:2px dashed var(--green);outline-offset:4px}
+        /* Light/Dark Theme Styles */
+        body.dark-theme {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        body.dark-theme .logo { color: #f7fafc; }
+        body.dark-theme header.header {
+            background-color: rgba(26, 32, 44, 0.7);
+        }
+        body.dark-theme .desktop-nav a { color: #cbd5e0; }
+        body.dark-theme .hamburger > div { background-color: #e2e8f0; }
+
+        body.dark-theme .floating-card {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        body.dark-theme .floating-card .text-gray-800,
+        body.dark-theme .floating-card .font-semibold {
+            color: #e2e8f0;
+        }
+        body.dark-theme .floating-card .text-gray-600 {
+            color: #cbd5e0;
+        }
+        body.dark-theme .floating-card.bg-gray-50 {
+            background-color: #2d3748;
+        }
+        body.dark-theme .floating-card.bg-white {
+            background-color: #2d3748;
+        }
+
+        body.dark-theme .text-gray-700 { color: #e2e8f0; }
+        body.dark-theme .text-gray-400 { color: #a0aec0; }
+        body.dark-theme .bg-gray-200 { background-color: #4a5568; }
+        body.dark-theme .border-gray-300 { border-color: #4a5568; }
+        body.dark-theme .rustic-font { color: #f7fafc; }
+        body.dark-theme .small-tag { color: #a0aec0; }
+
+        /* General styles for all text and elements */
+        .color-on-theme {
+            color: #1f2937;
+        }
+        body.dark-theme .color-on-theme {
+            color: #f7fafc;
+        }
+        .bg-on-theme {
+            background-color: #f3f4f6;
+        }
+        body.dark-theme .bg-on-theme {
+            background-color: #1a202c;
+        }
+        .bg-card-on-theme {
+            background-color: #ffffff;
+        }
+        body.dark-theme .bg-card-on-theme {
+            background-color: #2d3748;
+        }
+        .bg-card-on-theme-light {
+             background-color: #f9fafb;
+        }
+        body.dark-theme .bg-card-on-theme-light {
+             background-color: #2d3748;
+        }
+    </style>
+    <style>
+      :root {
+        --bp-bg: #05060a;
+        --bp-line: #3cf3ff;
+        --bp-glow: rgba(60, 243, 255, 0.75);
+        --bp-duration: 2600ms;
+        --bp-fade: 600ms;
+        --bp-grid: rgba(60,243,255,0.08);
+      }
+      #blueprint-loader {
+        position: fixed; inset: 0; z-index: 999999;
+        background: var(--bp-bg);
+        display: grid; place-items: center;
+        overflow: hidden; isolation: isolate;
+        pointer-events: all;
+      }
+      #blueprint-loader::before {
+        content: ""; position: absolute; inset: 0;
+        background:
+          linear-gradient(var(--bp-grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px);
+        background-size: 36px 36px;
+        filter: drop-shadow(0 0 10px var(--bp-glow));
+        opacity: .6;
+      }
+      .bp-stage { width: min(92vw, 980px); aspect-ratio: 16/9; position: relative; }
+      .bp-line {
+        fill: none; stroke: var(--bp-line); stroke-width: 2;
+        stroke-linecap: round; stroke-linejoin: round;
+        filter: drop-shadow(0 0 10px var(--bp-glow)) drop-shadow(0 0 30px var(--bp-glow));
+        stroke-dasharray: 600; stroke-dashoffset: 600;
+        animation: bp-draw var(--bp-duration) ease-out forwards;
+      }
+      @keyframes bp-draw { to { stroke-dashoffset: 0; } }
+      .bp-intro { position: absolute; inset: 0; display: grid; place-items: center;
+        font-family: system-ui, sans-serif; color: white; text-align: center;
+        opacity: 0; transform: translateY(8px);
+        transition: opacity 420ms ease, transform 420ms ease; }
+      .bp-intro.show { opacity: 1; transform: translateY(0); }
+      .bp-out { animation: bp-fade var(--bp-fade) ease forwards; pointer-events: none; }
+      @keyframes bp-fade { to { opacity: 0; visibility: hidden; } }
     </style>
 </head>
-<body>
-    
-    <div class="blueprint-animation-layer" id="blueprint-layer">
-        <div class="blueprint-container">
-            <div class="blueprint-grid"></div>
-            <svg class="blueprint-svg" viewBox="0 0 900 500">
-                <line class="line glow" x1="100" y1="250" x2="800" y2="250" id="line-1" />
-                <line class="line glow" x1="200" y1="150" x2="200" y2="350" id="line-2" />
-                <line class="line glow" x1="700" y1="150" x2="700" y2="350" id="line-3" />
-                
-                <line class="dimension-line" x1="200" y1="130" x2="700" y2="130" id="dim-line-1" />
-                <line class="dimension-line" x1="200" y1="130" x2="200" y2="150" />
-                <line class="dimension-line" x1="700" y1="130" x2="700" y2="150" />
-                
-                <text class="text" x="450" y="120" text-anchor="middle" id="dim-text-1">50' - 0"</text>
-                <text class="text" x="450" y="240" text-anchor="middle" id="main-text">W8x100</text>
-            </svg>
+<body class="bg-gray-50 min-h-screen">
+
+    <div id="blueprint-loader">
+      <div class="bp-stage">
+        <svg viewBox="0 0 800 450" width="100%" height="100%">
+          <path class="bp-line" d="M60 400 H740" />
+          <path class="bp-line" d="M160 400 V220" style="animation-delay: 120ms" />
+          <path class="bp-line" d="M640 400 V220" style="animation-delay: 160ms" />
+          <path class="bp-line" d="M160 220 L400 80" style="animation-delay: 260ms" />
+          <path class="bp-line" d="M400 80 L640 220" style="animation-delay: 360ms" />
+          <path class="bp-line" d="M380 100 H420" style="animation-delay: 460ms" />
+          <path class="bp-line" d="M360 400 V300 H440 V400" style="animation-delay: 520ms" />
+          <path class="bp-line" d="M220 320 H300 V260 H220 Z M260 320 V260 M220 290 H300" style="animation-delay: 620ms" />
+          <path class="bp-line" d="M500 320 H580 V260 H500 Z M540 320 V260 M500 290 H580" style="animation-delay: 720ms" />
+          <path class="bp-line" d="M120 420 H680 M120 420 V400 M680 420 V400" style="animation-delay: 820ms" />
+        </svg>
+        <div class="bp-intro" id="bp-intro">
+          <div>
+            <h1 style="font-size:clamp(28px,4vw,44px);margin:0 0 .4rem;">Welcome to my portfolio</h1>
+            <p style="opacity:.9;margin:0 0 1rem;">Structural Design • Shop Drawings • Tekla Modeling</p>
+            <button style="padding:.7rem 1.1rem; background:transparent; border:1px solid var(--bp-line); color:#fff; border-radius:999px;">View Projects</button>
+          </div>
         </div>
+      </div>
     </div>
-
-    <div class="cursor" id="cursor"></div>
-
-    <div class="side-elements left-side" aria-hidden="true">
-        <ul class="space-y-4">
-            <li><a class="magnetic-item hoverable" href="https://www.linkedin.com/in/md-sazzad-hossain-9311b8277" target="_blank" aria-label="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-slate"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a></li>
-        </ul>
-    </div>
-    <div class="side-elements right-side" aria-hidden="true">
-        <ul class="space-y-4">
-            <li class="email-link"><a class="magnetic-item hoverable muted" href="mailto:sazzad.civileng1@gmail.com">sazzad.civileng1@gmail.com</a></li>
-        </ul>
-    </div>
-
+    
     <header class="header top-0 left-0 right-0">
         <div class="nav-inner">
-            <div class="logo">Rebarshop Expart</div>
+            <button id="theme-toggle" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full font-semibold transition-colors duration-500">
+                Dark Mode
+            </button>
+            <div class="logo">Rebarshop Expert</div>
             <nav class="desktop-nav hidden md:flex items-center">
-                <a href="#about" class="hoverable">About</a>
-                <a href="#services" class="hoverable">Services</a>
-                <a href="#projects" class="hoverable">Projects</a>
-                <a href="#contact" class="hoverable">Contact</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
             </nav>
             <div class="flex items-center gap-4">
                 <div class="hamburger md:hidden cursor-pointer" id="hamburger" aria-label="Open menu">
@@ -155,276 +282,322 @@
         </div>
     </header>
 
-    <div class="mobile-nav fixed top-0 right-0 h-full w-3/4 max-w-xs bg-[#071229] z-50 p-8 hidden" id="mobileNav" aria-hidden="true" style="backdrop-filter:blur(8px)">
-        <a href="#about" class="block mb-6 hoverable">About</a>
-        <a href="#services" class="block mb-6 hoverable">Services</a>
-        <a href="#projects" class="block mb-6 hoverable">Projects</a>
-        <a href="#contact" class="block mb-6 hoverable">Contact</a>
+    <div class="mobile-nav fixed top-0 right-0 h-full w-3/4 max-w-xs bg-gray-900 z-50 p-8 hidden" id="mobileNav" aria-hidden="true" style="backdrop-filter:blur(8px)">
+        <a href="#about" class="block mb-6 text-white">About</a>
+        <a href="#services" class="block mb-6 text-white">Services</a>
+        <a href="#projects" class="block mb-6 text-white">Projects</a>
+        <a href="#contact" class="block mb-6 text-white">Contact</a>
     </div>
 
-    <section id="hero" class="pt-20">
-        <div class="beam" style="top:8%;left:-8%;width:48%;transform:rotate(8deg)"></div>
-        <div class="beam" style="bottom:18%;right:-12%;width:62%;transform:rotate(-12deg)"></div>
-        <div class="beam" style="top:44%;right:10%;width:36%;transform:rotate(3deg)"></div>
-        <div class="wrap">
-            <div class="hero-card reveal" style="backdrop-filter: blur(6px);">
-                <span class="small-tag mb-4 inline-block">Rebarshop Drawing & BBS</span>
-                <h1 class="section-typed typer" data-caret="|" data-type='["Welcome to my portfolio","Rebarshop Expart — Rebar Detailer","Precision drawings • Shop-ready BBS"]'></h1>
-                <p class="typer muted mt-4" data-caret="|" data-type='["2D floor plans, Tekla assemblies, SketchUp + V-Ray, Rebar takeoff & Excel estimating."]'></p>
-                <p class="muted mt-6">
-                    I am a rebar detailer and shop drawing expert delivering accurate bar lists, takeoffs, and fabrication-ready drawings. I help contractors speed up fabrication and reduce material waste.
-                </p>
-                <div class="mt-6 flex flex-wrap gap-3">
-                    <a class="btn" href="#projects">View Projects</a>
-                    <a class="glass-card flex items-center gap-2" href="#contact">Hire Me</a>
+    <section id="hero-intro" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-on-theme">
+        <div class="absolute bottom-0 left-0 wave-animation">
+            <svg width="400" height="300" viewBox="0 0 400 300" class="opacity-20">
+                <path d="M0,200 Q100,150 200,180 T400,160 L400,300 L0,300 Z" fill="url(#gradient1)"/>
+                <defs>
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
+            <div class="slide-in-left max-w-4xl w-full">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 rustic-font color-on-theme tracking-widest uppercase">welcome to my portfolio</h1>
+                <div class="floating-card bg-card-on-theme p-8 rounded-2xl w-full">
+                    <span class="small-tag mb-4 inline-block color-on-theme">Rebarshop Drawing & BBS</span>
+                    <h2 class="text-2xl font-semibold color-on-theme mb-4">Rebarshop Expert</h2>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        I am a rebar detailer and shop drawing expert delivering accurate bar lists, takeoffs, and fabrication-ready drawings. My work focuses on precision, speed, and efficiency.
+                    </p>
+                    <div class="flex gap-4 justify-center">
+                        <a href="#projects" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
+                            View Projects
+                        </a>
+                        <a href="#contact" class="border-2 border-gray-300 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:border-purple-500 text-gray-700 hover:text-purple-500">
+                            Hire Me
+                        </a>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="absolute top-20 right-20 floating-card bg-card-on-theme p-4 rounded-full w-16 h-16 flex items-center justify-center fade-in">
+            <span class="text-2xl">✨</span>
+        </div>
+
+        <div class="absolute bottom-32 right-32 floating-card bg-card-on-theme p-4 rounded-full w-20 h-20 flex items-center justify-center fade-in">
+            <span class="text-2xl">🎨</span>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-on-theme relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold color-on-theme mb-12 fade-in">About Me</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative slide-in-left">
+                    <div class="floating-card bg-card-on-theme p-4 rounded-3xl relative z-20 max-w-sm mx-auto lg:mx-0">
+                           <img src="sazzad.jpg" alt="Md Sazzad Hossain portrait" class="w-full h-80 object-cover rounded-2xl">
+                    </div>
+                    <div class="absolute -left-8 top-8 w-24 h-64 bg-gray-300 rounded-2xl -z-10"></div>
+                </div>
+
+                <div class="floating-card bg-card-on-theme-light p-8 rounded-2xl text-center slide-in-right">
+                    <p class="text-gray-600">
+                        Hello! I'm Md Sazzad Hossain — Rebarshop specialist. I produce rebar shop drawings, precise BBS, Tekla assemblies and clear BOQs so teams can fabricate and install with confidence. Experienced in AutoCAD, SketchUp, V-Ray, Bluebeam, Excel, and Tekla Structures. I focus on clarity, speed and fabrication readiness.
+                    </p>
+                    <div class="flex flex-wrap gap-3 my-6 justify-center">
+                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Experience: 1+ years</span>
+                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Location: Bangladesh</span>
+                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Availability: Open for Projects</span>
+                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Education: Diploma in Civil Engineering</span>
+                    </div>
+                    <div class="flex gap-4 justify-center">
+                        <a href="https://drive.google.com/drive/folders/11Qn_mtuL9yoK_gCi2a83vz1AuAiFj9ha?usp=sharing" target="_blank" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:border-purple-500 hover:text-purple-500 transition-all duration-300">View Video CV</a>
+                        <a href="https://drive.google.com/drive/folders/10_w7fkoTucHP-gtkGOb4UmZrnoTKzBO6?usp=sharing" target="_blank" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:border-purple-500 hover:text-purple-500 transition-all duration-300">Download Resume</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute top-0 right-0 wave-animation opacity-10">
+            <svg width="300" height="200" viewBox="0 0 300 200">
+                <path d="M0,100 Q75,50 150,80 T300,70 L300,0 L0,0 Z" fill="url(#gradient2)"/>
+                <defs>
+                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </section>
+
+    <section id="services" class="py-16 bg-on-theme">
+        <h2 class="text-4xl font-bold color-on-theme text-center mb-12 fade-in">Services I Offer</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
+            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-2xl">🎯</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Rebarshop Drawing & BBS</h3>
+                <p class="text-gray-600">Bar lists, cover checks, lap & anchor details, shop-ready BBS.</p>
+            </div>
+
+            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-2xl">✏️</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">2D Floor Plan</h3>
+                <p class="text-gray-600">Layered, dimensioned and site-friendly floor plans in AutoCAD.</p>
+            </div>
+
+            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-2xl">⚡</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Tekla Structures</h3>
+                <p class="text-gray-600">Assembly and single-part shop drawings ready for fabrication.</p>
+            </div>
+            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-2xl">📐</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Rebar Takeoff</h3>
+                <p class="text-gray-600">Accurate material takeoff with bar mapping and marks.</p>
+            </div>
+            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-2xl">📊</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Estimating with Excel</h3>
+                <p class="text-gray-600">Templates, cost codes, and linked sheets for quick adjustments.</p>
+            </div>
+            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-2xl">🎨</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">SketchUp 3D & V-Ray</h3>
+                <p class="text-gray-600">3D models and realistic renders for visual approvals.</p>
             </div>
         </div>
     </section>
 
-    <main class="max-w-[1200px] mx-auto px-6 py-12">
-        <section id="about" class="py-16">
-            <h2 class="section-typed typer reveal" data-caret="|" data-type='["About Me"]'></h2>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="reveal about-photo">
-                    <div class="relative group">
-                        <div class="absolute inset-0 rounded-xl bg-[linear-gradient(135deg,#ff9a3c33,#56c2ff33)] blur-3xl opacity-60 group-hover:opacity-100 transition-all"></div>
-                        <img src="sazzad.jpg" alt="Md Sazzad Hossain portrait" class="relative rounded-xl object-cover w-64 h-64 md:w-80 md:h-80" loading="lazy">
+    <section id="projects" class="py-16 bg-on-theme">
+        <h2 class="text-4xl font-bold color-on-theme text-center mb-12 fade-in">Project Gallery</h2>
+        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
+        </div>
+        <div class="text-center mt-8 fade-in">
+            <a class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105" href="https://drive.google.com/drive/folders/1v_619B-_rbveJ2b73I_CCmF2LTeH1Iim?usp=drive_link" target="_blank">View All Projects</a>
+        </div>
+    </section>
+
+    <section id="contact" class="min-h-screen py-20 flex items-center justify-center bg-gray-900 text-white relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="slide-in-left">
+                    <h2 class="text-5xl font-bold mb-6">Let's Create Something Amazing</h2>
+                    <p class="text-gray-300 text-lg mb-8">Ready to bring your vision to life? I'd love to hear about your project and explore how we can work together.</p>
+                    
+                    <div class="floating-card bg-gray-800 p-6 rounded-2xl space-y-4">
+                        <a href="mailto:sazzad.civileng1@gmail.com" class="flex items-center gap-4 group cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                                <span class="text-white">📧</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-400 group-hover:text-white transition-colors duration-300">Email</h4>
+                                <p class="text-gray-400 group-hover:text-white transition-colors duration-300">sazzad.civileng1@gmail.com</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://www.linkedin.com/in/md-sazzad-hossain-9311b8277" target="_blank" class="flex items-center gap-4 group cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                            <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-400 group-hover:text-white transition-colors duration-300">Let's Connect</h4>
+                                <p class="text-gray-400 underline group-hover:text-white transition-colors duration-300">LinkedIn Profile</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <div class="reveal">
-                    <p class="muted mb-4">
-                        Hello! I'm Md Sazzad Hossain — Rebarshop specialist. I produce rebar shop drawings, precise BBS, Tekla assemblies and clear BOQs so teams can fabricate and install with confidence.
-                    </p>
-                    <p class="muted mb-6">
-                        Experienced in AutoCAD, SketchUp, V-Ray, Bluebeam, Excel, and Tekla Structures. I focus on clarity, speed and fabrication readiness.
-                    </p>
-                    <div class="flex flex-wrap gap-3 my-6">
-                        <span class="inline-block py-2 px-4 border border-[#122135] bg-[#0b1526] rounded-full text-slate-300 text-sm font-medium">Experience: 1+ years</span>
-                        <span class="inline-block py-2 px-4 border border-[#122135] bg-[#0b1526] rounded-full text-slate-300 text-sm font-medium">Location: Bangladesh</span>
-                        <span class="inline-block py-2 px-4 border border-[#122135] bg-[#0b1526] rounded-full text-slate-300 text-sm font-medium">Availability: Open for Projects</span>
-                        <span class="inline-block py-2 px-4 border border-[#122135] bg-[#0b1526] rounded-full text-slate-300 text-sm font-medium">Education: Diploma in Civil Engineering </span>
-                    </div>
-                    <div class="flex gap-3 flex-wrap">
-                        <a href="https://drive.google.com/drive/folders/11Qn_mtuL9yoK_gCi2a83vz1AuAiFj9ha?usp=sharing" target="_blank" class="glass-card hoverable">View Video CV</a>
-                        <a href="https://drive.google.com/drive/folders/10_w7fkoTucHP-gtkGOb4UmZrnoTKzBO6?usp=sharing" target="_blank" class="glass-card hoverable">Download Resume</a>
+
+                <div class="slide-in-right text-center">
+                    <div class="floating-card bg-white text-gray-800 p-8 rounded-3xl relative" style="z-index: 20;">
+                        <h3 class="text-2xl font-semibold mb-6 color-on-theme">Get in Touch</h3>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sazzad.civileng1@gmail.com&su=Collaboration%20Request%20from%20Website&body=Hello%20Sazzad,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20opportunity%20with%20you."
+                           class="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-4 rounded-lg font-semibold w-full block hover:shadow-lg transition-all duration-300 hover:scale-105"
+                           target="_blank">
+                            Send Email
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="services" class="py-16">
-            <h2 class="section-typed typer reveal" data-caret="|" data-type='["Services I Offer"]'></h2>
-            <p class="muted mb-8">High-accuracy drawings and estimates — tailored to each project's needs.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass-card reveal"> <h3 class="text-white font-bold mb-2">Rebarshop Drawing & BBS</h3> <p class="muted">Bar lists, cover checks, lap & anchor details, shop-ready BBS.</p> </div>
-                <div class="glass-card reveal"> <h3 class="text-white font-bold mb-2">2D Floor Plan</h3> <p class="muted">Layered, dimensioned and site-friendly floor plans in AutoCAD.</p> </div>
-                <div class="glass-card reveal"> <h3 class="text-white font-bold mb-2">SketchUp 3D & V-Ray</h3> <p class="muted">3D models and realistic renders for visual approvals.</p> </div>
-                <div class="glass-card reveal"> <h3 class="text-white font-bold mb-2">Rebar Takeoff</h3> <p class="muted">Accurate material takeoff with bar mapping and marks.</p> </div>
-                <div class="glass-card reveal"> <h3 class="text-white font-bold mb-2">Estimating with Excel</h3> <p class="muted">Templates, cost codes, and linked sheets for quick adjustments.</p> </div>
-                <div class="glass-card reveal"> <h3 class="text-white font-bold mb-2">Tekla Structures</h3> <p class="muted">Assembly and single-part shop drawings ready for fabrication.</p> </div>
-            </div>
-        </section>
-
-        <section id="tools" class="py-16">
-            <h2 class="section-typed typer reveal" data-caret="|" data-type='["Tools & Software"]'></h2>
-            <p class="muted mb-8">Apps I use daily</p>
-            <div class="flex flex-wrap gap-3">
-                <span class="glass-card reveal">AutoCAD</span>
-                <span class="glass-card reveal">SketchUp</span>
-                <span class="glass-card reveal">V-Ray</span>
-                <span class="glass-card reveal">Bluebeam</span>
-                <span class="glass-card reveal">Excel</span>
-                <span class="glass-card reveal">Tekla Structures</span>
-            </div>
-        </section>
-
-        <section id="projects" class="py-16">
-            <h2 class="section-typed typer reveal" data-caret="|" data-type='["Project Gallery"]'></h2>
-            <p class="muted mb-8">A selection of completed jobs — click to open Drive files or view images.</p>
-            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            </div>
-            <div class="text-center mt-8">
-                <a class="btn" href="https://drive.google.com/drive/folders/1v_619B-_rbveJ2b73I_CCmF2LTeH1Iim?usp=drive_link" target="_blank">View All Projects</a>
-            </div>
-        </section>
-
-        <section id="contact" class="py-16 text-center max-w-2xl mx-auto">
-            <h2 class="section-typed typer reveal" data-caret="|" data-type='["04. What’s Next?","Get In Touch"]'></h2>
-            <p class="muted mb-8">I'm available for freelance work and new projects. Feel free to reach out via email or connect with me on LinkedIn. I'll reply quickly!</p>
-            <div class="flex justify-center items-center flex-wrap gap-4">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sazzad.civileng1@gmail.com&su=Collaboration%20Request%20from%20Website&body=Hello%20Sazzad%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20opportunity%20with%20you." class="btn hoverable flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
-                    <span>Email Me</span>
-                </a>
-                <a href="https://www.linkedin.com/in/md-sazzad-hossain-9311b8277" target="_blank" class="glass-card hoverable flex items-center gap-2 text-white">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    <span>LinkedIn</span>
-                </a>
-            </div>
-        </section>
-    </main>
+        <div class="absolute bottom-0 left-0 wave-animation">
+            <svg width="500" height="200" viewBox="0 0 500 200" class="opacity-10">
+                <path d="M0,100 Q125,50 250,80 T500,70 L500,200 L0,200 Z" fill="url(#gradient3)"/>
+                <defs>
+                    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </section>
 
     <footer>
-        <p class="muted">Designed & Built by Md Sazzad Hossain — Rebarshop Expart</p> </footer>
+        <p class="muted text-center py-8 text-gray-400">Designed & Built by Md Sazzad Hossain — Rebarshop Expert</p>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script>
-    // ---------- Utilities & init ----------
-    document.addEventListener('DOMContentLoaded', ()=>{
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            gsap.to(cursor, {duration:0.16, x:e.clientX, y:e.clientY, ease:"power2.out"});
-        });
-        document.querySelectorAll('.hoverable').forEach(el=>{
-            el.addEventListener('mouseenter', ()=> cursor.classList.add('grow'));
-            el.addEventListener('mouseleave', ()=> cursor.classList.remove('grow'));
-        });
-        const hamburger = document.getElementById('hamburger');
-        const mobileNav = document.getElementById('mobileNav');
-        if(hamburger){
-            hamburger.addEventListener('click', ()=>{
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                observer.observe(el);
+            });
+
+            // ---------- EDIT YOUR PROJECTS HERE ----------
+            const projects = [
+                {
+                    title:'Rebarshop Drowing',
+                    desc:'Rebarshop Drawing & BBS',
+                    img:'1.png',
+                    link:'https://drive.google.com/file/d/1tZB9DewgG-GyK0IftkYXB2E2DvCosZCB/view?usp=sharing'
+                },
+                {
+                    title:'Tekla Assembly Sheets',
+                    desc:'Assembly and single-part drawings',
+                    img:'2.png',
+                    link:'https://drive.google.com/file/d/1I1NiyhuxJxtLzS9wZ1sOZ4jyJqqEbJmz/view?usp=sharing'
+                },
+                {
+                    title:'SketchUp + V-Ray Render',
+                    desc:'Exterior views',
+                    img:'3.png',
+                    link:'https://drive.google.com/file/d/1ha_CFElv7KbnNuD74kZv8kRL5uSKQSdU/view?usp=sharing'
+                }
+            ];
+            // ---------------------------------------------
+            const grid = document.getElementById('projectsGrid');
+            if (grid) {
+                projects.forEach(p=>{
+                    const div = document.createElement('div');
+                    div.className = 'floating-card bg-card-on-theme p-4 rounded-2xl fade-in';
+                    div.innerHTML = `<a href="${p.link}" target="_blank" class="block group">
+                        <img src="${p.img}" alt="${p.title}" class="w-full h-56 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-4">
+                            <h4 class="font-bold color-on-theme">${p.title}</h4>
+                            <p class="text-gray-600 mt-1">${p.desc}</p>
+                        </div>
+                    </a>`;
+                    grid.appendChild(div);
+                    observer.observe(div);
+                });
+            }
+
+            // Mobile menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+            hamburger.addEventListener('click', () => {
                 mobileNav.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
             });
-        }
-        document.querySelectorAll('.magnetic-item').forEach(item=>{
-            item.addEventListener('mousemove', (e)=>{
-                const r = item.getBoundingClientRect();
-                const x = (e.clientX - r.left - r.width/2) * 0.2;
-                const y = (e.clientY - r.top - r.height/2) * 0.2;
-                gsap.to(item, {x, y, duration:0.35, ease:'power2.out'});
-            });
-            item.addEventListener('mouseleave', ()=> gsap.to(item, {x:0,y:0,duration:0.35}));
-        });
-        function revealOnScroll(){
-            document.querySelectorAll('.reveal').forEach(el=>{
-                if(el.classList.contains('show')) return;
-                ScrollTrigger.create({
-                    trigger: el,
-                    start: 'top 80%',
-                    onEnter: ()=> el.classList.add('show')
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
                 });
             });
-        }
-        revealOnScroll();
-        gsap.to('.beam', {y:10, repeat:-1, yoyo:true, duration:6, ease:'sine.inOut'});
-        class Typer {
-            constructor(el){
-                this.el = el;
-                const raw = el.getAttribute('data-type') || '[""]';
-                try{ this.lines = JSON.parse(raw); } catch(e){ this.lines = [raw]; }
-                this.loop = el.getAttribute('data-loop') === 'true';
-                this.speed = parseInt(el.getAttribute('data-speed')||28);
-                this.pause = parseInt(el.getAttribute('data-delay')||1200);
-                this.caret = el.getAttribute('data-caret') || '|';
-                el.setAttribute('data-caret', this.caret);
-                this.i = 0;
-                this.txt = '';
-                this.dir = 1;
-                this.play();
-            }
-            async play(){
-                while(true){
-                    const line = this.lines[this.i] || '';
-                    for(let k = 0; k <= line.length; k++){
-                        this.el.textContent = line.slice(0,k);
-                        await this.wait(this.speed);
-                    }
-                    await this.wait(this.pause);
-                    for(let k = line.length; k >= 0; k--){
-                        if(!this.loop && this.i === 0 && k===0){
-                            this.el.textContent = line;
-                            return;
-                        }
-                        this.el.textContent = line.slice(0,k);
-                        await this.wait(Math.max(12, this.speed*0.6));
-                    }
-                    this.i = (this.i + 1) % this.lines.length;
+
+            // Theme Toggle
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                if (document.body.classList.contains('dark-theme')) {
+                    themeToggleBtn.textContent = 'Light Mode';
+                } else {
+                    themeToggleBtn.textContent = 'Dark Mode';
                 }
-            }
-            wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
-        }
-        document.querySelectorAll('.typer').forEach(el => new Typer(el));
-        gsap.utils.toArray('.section-typed').forEach((el,i)=>{
-            gsap.fromTo(el, {opacity:0, y:20},{opacity:1,y:0,duration:.8,delay:0.3+i*0.08, ease:'power3.out'});
-        });
-        
-        // ---------- Blueprint Animation Logic ----------
-        const blueprintTl = gsap.timeline({
-            onComplete: () => {
-                document.getElementById('blueprint-layer').classList.add('hidden');
-                document.body.classList.remove('no-scroll');
-            }
-        });
-        
-        gsap.set('.blueprint-svg .line', { strokeDashoffset: 1000 });
-        gsap.set('.blueprint-svg .dimension-line', { strokeDashoffset: 100 });
-        gsap.set('.blueprint-svg .text', { opacity: 0, y: 10 });
-        
-        blueprintTl
-            .fromTo('.blueprint-grid', {opacity: 0}, {opacity: 0.1, duration: 1.5, ease: 'power2.out'})
-            .fromTo('#line-1', {strokeDashoffset: 1000}, {strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut'}, ">-0.5")
-            .fromTo('#line-2', {strokeDashoffset: 1000}, {strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut'})
-            .fromTo('#line-3', {strokeDashoffset: 1000}, {strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut'}, "<")
-            .to('#main-text', {opacity: 1, y: 0, duration: 0.5, ease: 'power2.out'}, ">-0.5")
-            .fromTo('#dim-line-1', {strokeDashoffset: 100}, {strokeDashoffset: 0, duration: 1, ease: 'power2.inOut'}, ">-0.2")
-            .to('#dim-text-1', {opacity: 1, y: 0, duration: 0.5, ease: 'power2.out'}, ">-0.5")
-            .to('.blueprint-container', {
-                scale: 1.2,
-                opacity: 0,
-                duration: 1.5,
-                ease: "power2.inOut"
-            }, "+=1");
-
-        window.addEventListener('load', () => {
-            gsap.delayedCall(0.5, () => blueprintTl.play());
-        });
-
-        // ---------- EDIT YOUR PROJECTS HERE ----------
-        const projects = [
-            {
-                title:'Rebarshop Drowing',
-                desc:'Rebarshop Drawing & BBS',
-                img:'1.png',
-                link:'https://drive.google.com/file/d/1tZB9DewgG-GyK0IftkYXB2E2DvCosZCB/view?usp=sharing'
-            },
-            {
-                title:'Tekla Assembly Sheets',
-                desc:'Assembly and single-part drawings',
-                img:'2.png',
-                link:'https://drive.google.com/file/d/1I1NiyhuxJxtLzS9wZ1sOZ4jyJqqEbJmz/view?usp=sharing'
-            },
-            {
-                title:'SketchUp + V-Ray Render',
-                desc:'Exterior views',
-                img:'3.png',
-                link:'https://drive.google.com/file/d/1ha_CFElv7KbnNuD74kZv8kRL5uSKQSdU/view?usp=sharing'
-            }
-        ];
-        // ---------------------------------------------
-
-        const grid = document.getElementById('projectsGrid');
-        if (grid) {
-            projects.forEach(p=>{
-                const div = document.createElement('div');
-                div.className = 'project-thumb reveal';
-                div.innerHTML = `<a href="${p.link}" target="_blank" class="block group">
-                    <img src="${p.img}" alt="${p.title}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="p-4">
-                        <h4 class="text-white font-bold">${p.title}</h4>
-                        <p class="muted mt-1">${p.desc}</p>
-                    </div>
-                </a>`;
-                grid.appendChild(div);
             });
-            revealOnScroll();
-        }
-
-        document.body.addEventListener('keydown', (e)=>{
-            if(e.key === 'Tab') document.documentElement.classList.add('show-focus')
         });
-    });
+    </script>
+    <script>
+      (function() {
+        const overlay = document.getElementById('blueprint-loader');
+        const intro = document.getElementById('bp-intro');
+        const hero = document.getElementById('hero-intro');
+        function prepPaths(){
+          overlay.querySelectorAll('.bp-line').forEach(p=>{
+            try { const len=p.getTotalLength(); p.style.strokeDasharray=len; p.style.strokeDashoffset=len; } catch(e){}
+          });
+        }
+        function showIntro(){ setTimeout(()=>intro.classList.add('show'),0); }
+        function revealSite(){ if(hero) hero.classList.add('hero-show'); overlay.classList.add('bp-out'); setTimeout(()=>overlay.remove(),600); }
+        window.addEventListener('load',()=>{ prepPaths(); showIntro(); setTimeout(revealSite,3200); });
+      })();
     </script>
 </body>
 </html>
