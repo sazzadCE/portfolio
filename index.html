@@ -36,10 +36,6 @@
             50% { transform: translateY(-10px) rotate(2deg); }
         }
 
-        .parallax-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -123,21 +119,20 @@
             width: 100%;
             left: 0;
         }
-        @media (max-width:768px){ .desktop-nav{display:none} .hamburger{display:block} }
         .hamburger > div {width: 24px; height: 3px; background-color: #333; margin: 4px 0;}
 
         .rustic-font {
             font-family: 'Rustic Roadway', cursive;
         }
 
-        /* Responsive font size for the main heading */
         .hero-title {
-            font-size: 3rem; /* Default for larger screens */
+            font-size: 3rem;
         }
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.25rem; /* Smaller font for mobile devices */
+                font-size: 2.25rem;
             }
+             .desktop-nav{display:none} .hamburger{display:block}
         }
 
         /* Light/Dark Theme Styles */
@@ -163,45 +158,33 @@
         body.dark-theme .floating-card .text-gray-600 {
             color: #cbd5e0;
         }
-        body.dark-theme .floating-card.bg-gray-50 {
-            background-color: #2d3748;
-        }
+        body.dark-theme .floating-card.bg-gray-50,
         body.dark-theme .floating-card.bg-white {
             background-color: #2d3748;
         }
 
         body.dark-theme .text-gray-700 { color: #e2e8f0; }
         body.dark-theme .text-gray-400 { color: #a0aec0; }
+        body.dark-theme .text-gray-300 { color: #d1d5db; }
         body.dark-theme .bg-gray-200 { background-color: #4a5568; }
         body.dark-theme .border-gray-300 { border-color: #4a5568; }
         body.dark-theme .rustic-font { color: #f7fafc; }
         body.dark-theme .small-tag { color: #a0aec0; }
 
-        /* General styles for all text and elements */
-        .color-on-theme {
-            color: #1f2937;
-        }
-        body.dark-theme .color-on-theme {
-            color: #f7fafc;
-        }
-        .bg-on-theme {
-            background-color: #f3f4f6;
-        }
-        body.dark-theme .bg-on-theme {
-            background-color: #1a202c;
-        }
-        .bg-card-on-theme {
-            background-color: #ffffff;
-        }
-        body.dark-theme .bg-card-on-theme {
-            background-color: #2d3748;
-        }
-        .bg-card-on-theme-light {
-             background-color: #f9fafb;
-        }
-        body.dark-theme .bg-card-on-theme-light {
-             background-color: #2d3748;
-        }
+        /* Generic theme-aware classes */
+        .color-on-theme { color: #1f2937; }
+        body.dark-theme .color-on-theme { color: #f7fafc; }
+        
+        .bg-on-theme { background-color: #f3f4f6; }
+        body.dark-theme .bg-on-theme { background-color: #1a202c; }
+        
+        .bg-card-on-theme { background-color: #ffffff; }
+        body.dark-theme .bg-card-on-theme { background-color: #2d3748; }
+
+        .bg-card-on-theme-light { background-color: #f9fafb; }
+        body.dark-theme .bg-card-on-theme-light { background-color: #2d3748; }
+
+        .mobile-nav.dark-theme-nav { background-color: rgba(26, 32, 44, 0.9); }
     </style>
     <style>
       :root {
@@ -274,7 +257,7 @@
     
     <header class="header top-0 left-0 right-0">
         <div class="nav-inner">
-            <button id="theme-toggle" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full font-semibold transition-colors duration-500">
+            <button id="theme-toggle" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full font-semibold transition-colors duration-500 text-sm">
                 Dark Mode
             </button>
             <div class="logo">Rebarshop Expert</div>
@@ -286,265 +269,259 @@
                 <a href="#contact">Contact</a>
                 <a href="#contact" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300">Hire Me</a>
             </nav>
-            <div class="flex items-center gap-4">
-                <div class="hamburger md:hidden cursor-pointer" id="hamburger" aria-label="Open menu">
-                    <div></div><div></div><div></div>
-                </div>
+            <div class="hamburger md:hidden cursor-pointer" id="hamburger" aria-label="Open menu">
+                <div></div><div></div><div></div>
             </div>
         </div>
     </header>
 
-    <div class="mobile-nav fixed top-0 right-0 h-full w-3/4 max-w-xs bg-gray-900 z-50 p-8 hidden" id="mobileNav" aria-hidden="true" style="backdrop-filter:blur(8px)">
-        <a href="#about" class="block mb-6 text-white">About</a>
-        <a href="#services" class="block mb-6 text-white">Services</a>
-        <a href="#skills" class="block mb-6 text-white">Skills</a>
-        <a href="#projects" class="block mb-6 text-white">Projects</a>
-        <a href="#contact" class="block mb-6 text-white">Contact</a>
+    <div class="mobile-nav fixed top-0 right-0 h-full w-3/4 max-w-xs bg-white z-50 p-8 hidden" id="mobileNav" aria-hidden="true" style="backdrop-filter:blur(8px)">
+        <a href="#about" class="block mb-6 text-gray-800">About</a>
+        <a href="#services" class="block mb-6 text-gray-800">Services</a>
+        <a href="#skills" class="block mb-6 text-gray-800">Skills</a>
+        <a href="#projects" class="block mb-6 text-gray-800">Projects</a>
+        <a href="#contact" class="block mb-6 text-gray-800">Contact</a>
         <a href="#contact" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300">Hire Me</a>
     </div>
 
-    <section id="hero-intro" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-on-theme">
-        <div class="absolute bottom-0 left-0 wave-animation">
-            <svg width="400" height="300" viewBox="0 0 400 300" class="opacity-20">
-                <path d="M0,200 Q100,150 200,180 T400,160 L400,300 L0,300 Z" fill="url(#gradient1)"/>
-                <defs>
-                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-
-        <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
-            <div class="slide-in-left max-w-4xl w-full">
-                <h1 class="hero-title font-bold mb-4 rustic-font color-on-theme tracking-widest uppercase">welcome to my portfolio</h1>
-                <div class="floating-card bg-card-on-theme p-8 rounded-2xl w-full">
-                    <span class="small-tag mb-4 inline-block color-on-theme">Rebarshop Drawing & BBS</span>
-                    <h2 class="text-2xl font-semibold color-on-theme mb-4">Rebarshop Expert</h2>
-                    <p class="text-gray-600 leading-relaxed mb-6">
-                        I am a rebar detailer and shop drawing expert delivering accurate bar lists, takeoffs, and fabrication-ready drawings. My work focuses on precision, speed, and efficiency.
-                    </p>
-                    <div class="flex gap-4 justify-center">
-                        <a href="#projects" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
-                            View Projects
-                        </a>
-                        <a href="#contact" class="border-2 border-gray-300 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:border-purple-500 text-gray-700 hover:text-purple-500">
-                            Hire Me
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="absolute top-20 right-20 floating-card bg-card-on-theme p-4 rounded-full w-16 h-16 flex items-center justify-center fade-in">
-            <span class="text-2xl">✨</span>
-        </div>
-
-        <div class="absolute bottom-32 right-32 floating-card bg-card-on-theme p-4 rounded-full w-20 h-20 flex items-center justify-center fade-in">
-            <span class="text-2xl">🎨</span>
-        </div>
-    </section>
-
-    <section id="about" class="py-20 bg-on-theme relative">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-bold color-on-theme mb-12 fade-in">About Me</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="relative slide-in-left">
-                    <div class="floating-card bg-card-on-theme p-4 rounded-3xl relative z-20 max-w-sm mx-auto lg:mx-0">
-                           <img src="sazzad.jpg" alt="Md Sazzad Hossain portrait" class="w-full h-80 object-cover rounded-2xl">
-                    </div>
-                    <div class="absolute -left-8 top-8 w-24 h-64 bg-gray-300 rounded-2xl -z-10"></div>
-                </div>
-
-                <div class="floating-card bg-card-on-theme-light p-8 rounded-2xl text-center slide-in-right">
-                    <p class="text-gray-600">
-                        Hello! I'm Md Sazzad Hossain — Rebarshop specialist. I produce rebar shop drawings, precise BBS, Tekla assemblies and clear BOQs so teams can fabricate and install with confidence. Experienced in AutoCAD, SketchUp, V-Ray, Bluebeam, Excel, and Tekla Structures. I focus on clarity, speed and fabrication readiness.
-                    </p>
-                    <div class="flex flex-wrap gap-3 my-6 justify-center">
-                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Experience: 1+ years</span>
-                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Location: Bangladesh</span>
-                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Availability: Open for Projects</span>
-                        <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Education: Diploma in Civil Engineering</span>
-                    </div>
-                    <div class="flex gap-4 justify-center">
-                        <a href="https://drive.google.com/drive/folders/11Qn_mtuL9yoK_gCi2a83vz1AuAiFj9ha?usp=sharing" target="_blank" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:border-purple-500 hover:text-purple-500 transition-all duration-300">View Video CV</a>
-                        <a href="https://drive.google.com/drive/folders/10_w7fkoTucHP-gtkGOb4UmZrnoTKzBO6?usp=sharing" target="_blank" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:border-purple-500 hover:text-purple-500 transition-all duration-300">Download Resume</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="absolute top-0 right-0 wave-animation opacity-10">
-            <svg width="300" height="200" viewBox="0 0 300 200">
-                <path d="M0,100 Q75,50 150,80 T300,70 L300,0 L0,0 Z" fill="url(#gradient2)"/>
-                <defs>
-                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-    </section>
-
-    <section id="services" class="py-16 bg-on-theme">
-        <h2 class="text-4xl font-bold color-on-theme text-center mb-12 fade-in">Services I Offer</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
-            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
-                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span class="text-white text-2xl">🎯</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-4">Rebarshop Drawing & BBS</h3>
-                <p class="text-gray-600">Bar lists, cover checks, lap & anchor details, shop-ready BBS.</p>
+    <main>
+        <section id="hero-intro" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-on-theme">
+            <div class="absolute bottom-0 left-0 wave-animation">
+                <svg width="400" height="300" viewBox="0 0 400 300" class="opacity-20">
+                    <path d="M0,200 Q100,150 200,180 T400,160 L400,300 L0,300 Z" fill="url(#gradient1)"/>
+                    <defs>
+                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
             </div>
 
-            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
-                <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span class="text-white text-2xl">✏️</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-4">2D Floor Plan</h3>
-                <p class="text-gray-600">Layered, dimensioned and site-friendly floor plans in AutoCAD.</p>
-            </div>
-
-            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
-                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span class="text-white text-2xl">⚡</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-4">Tekla Structures</h3>
-                <p class="text-gray-600">Assembly and single-part shop drawings ready for fabrication.</p>
-            </div>
-            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
-                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span class="text-white text-2xl">📐</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-4">Rebar Takeoff</h3>
-                <p class="text-gray-600">Accurate material takeoff with bar mapping and marks.</p>
-            </div>
-            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
-                <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span class="text-white text-2xl">📊</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-4">Estimating with Excel</h3>
-                <p class="text-gray-600">Templates, cost codes, and linked sheets for quick adjustments.</p>
-            </div>
-            <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
-                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span class="text-white text-2xl">🎨</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-4">SketchUp 3D & V-Ray</h3>
-                <p class="text-gray-600">3D models and realistic renders for visual approvals.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="py-16 bg-on-theme">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold color-on-theme mb-4 fade-in">Technical Skills</h2>
-            <p class="text-gray-600 mb-12 fade-in">Software and tools I use to deliver professional results</p>
-            <div class="flex flex-wrap gap-4 justify-center">
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in">AutoCAD</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 100ms">Tekla Structures</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 200ms">SketchUp</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 300ms">V-Ray</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 400ms">Microsoft Excel</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 500ms">Bluebeam</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 600ms">Rebar Detailing</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 700ms">BBS Creation</span>
-                <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 800ms">Quantity Takeoff</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-16 bg-on-theme">
-        <h2 class="text-4xl font-bold color-on-theme text-center mb-12 fade-in">Project Gallery</h2>
-        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
-        </div>
-        <div class="text-center mt-8 fade-in">
-            <a class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105" href="https://drive.google.com/drive/folders/1v_619B-_rbveJ2b73I_CCmF2LTeH1Iim?usp=drive_link" target="_blank">View All Projects</a>
-        </div>
-    </section>
-
-    <section id="contact" class="min-h-screen py-20 flex items-center justify-center bg-gray-900 text-white relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="slide-in-left">
-                    <h2 class="text-5xl font-bold mb-6">Let's Create Something Amazing</h2>
-                    <p class="text-gray-300 text-lg mb-8">Ready to bring your vision to life? I'd love to hear about your project and explore how we can work together.</p>
-                    
-                    <div class="floating-card bg-gray-800 p-6 rounded-2xl space-y-4">
-                        <a href="mailto:sazzad.civileng1@gmail.com" class="flex items-center gap-4 group cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-                                <span class="text-white">📧</span>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-400 group-hover:text-white transition-colors duration-300">Email</h4>
-                                <p class="text-gray-400 group-hover:text-white transition-colors duration-300">sazzad.civileng1@gmail.com</p>
-                            </div>
-                        </a>
-                        
-                        <a href="https://www.linkedin.com/in/md-sazzad-hossain-9311b8277" target="_blank" class="flex items-center gap-4 group cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                            <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white">
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                    <rect x="2" y="9" width="4" height="12"></rect>
-                                    <circle cx="4" cy="4" r="2"></circle>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-400 group-hover:text-white transition-colors duration-300">Let's Connect</h4>
-                                <p class="text-gray-400 underline group-hover:text-white transition-colors duration-300">LinkedIn Profile</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="slide-in-right text-center">
-                    <div class="floating-card bg-card-on-theme text-gray-800 p-8 rounded-3xl relative" style="z-index: 20;">
-                        <h3 class="text-2xl font-semibold mb-6 color-on-theme">Get in Touch</h3>
-                        <div class="space-y-4">
-                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sazzad.civileng1@gmail.com&su=Collaboration%20Request%20from%20Website&body=Hello%20Sazzad,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20opportunity%20with%20you."
-                               class="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-4 rounded-lg font-semibold w-full block hover:shadow-lg transition-all duration-300 hover:scale-105"
-                               target="_blank">
-                                Send Email
+            <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
+                <div class="slide-in-left max-w-4xl w-full">
+                    <h1 class="hero-title font-bold mb-4 rustic-font color-on-theme tracking-widest uppercase">welcome to my portfolio</h1>
+                    <div class="floating-card bg-card-on-theme p-8 rounded-2xl w-full">
+                        <span class="small-tag mb-4 inline-block color-on-theme">Rebarshop Drawing & BBS</span>
+                        <h2 class="text-2xl font-semibold color-on-theme mb-4">Rebarshop Expert</h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            I am a rebar detailer and shop drawing expert delivering accurate bar lists, takeoffs, and fabrication-ready drawings. My work focuses on precision, speed, and efficiency.
+                        </p>
+                        <div class="flex gap-4 justify-center">
+                            <a href="#projects" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
+                                View Projects
                             </a>
-                            <a href="https://www.linkedin.com/in/md-sazzad-hossain-9311b8277"
-                               class="border border-gray-300 py-4 rounded-lg font-semibold w-full block transition-colors duration-300 hover:border-blue-500 text-gray-700 hover:text-blue-500"
-                               target="_blank">
-                                Let's Connect on LinkedIn
+                            <a href="#contact" class="border-2 border-gray-300 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:border-purple-500 text-gray-700 hover:text-purple-500">
+                                Hire Me
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="absolute bottom-0 left-0 wave-animation">
-            <svg width="500" height="200" viewBox="0 0 500 200" class="opacity-10">
-                <path d="M0,100 Q125,50 250,80 T500,70 L500,200 L0,200 Z" fill="url(#gradient3)"/>
-                <defs>
-                    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-    </section>
+            <div class="absolute top-20 right-20 floating-card bg-card-on-theme p-4 rounded-full w-16 h-16 flex items-center justify-center fade-in">
+                <span class="text-2xl">✨</span>
+            </div>
+            <div class="absolute bottom-32 right-32 floating-card bg-card-on-theme p-4 rounded-full w-20 h-20 flex items-center justify-center fade-in">
+                <span class="text-2xl">💡</span>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-on-theme relative">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-4xl font-bold color-on-theme mb-12 fade-in">About Me</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative slide-in-left">
+                        <div class="floating-card bg-card-on-theme p-4 rounded-3xl relative z-20 max-w-sm mx-auto lg:mx-0">
+                                <img src="sazzad.jpg" alt="Md Sazzad Hossain portrait" class="w-full h-80 object-cover rounded-2xl">
+                        </div>
+                    </div>
+
+                    <div class="floating-card bg-card-on-theme-light p-8 rounded-2xl text-center slide-in-right">
+                        <p class="text-gray-600">
+                            Hello! I'm Md Sazzad Hossain — Rebarshop specialist. I produce rebar shop drawings, precise BBS, Tekla assemblies and clear BOQs so teams can fabricate and install with confidence. Experienced in AutoCAD, SketchUp, V-Ray, Bluebeam, Excel, and Tekla Structures. I focus on clarity, speed and fabrication readiness.
+                        </p>
+                        <div class="flex flex-wrap gap-3 my-6 justify-center">
+                            <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Experience: 1+ years</span>
+                            <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Location: Bangladesh</span>
+                            <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Availability: Open for Projects</span>
+                            <span class="bg-gray-200 text-gray-700 py-2 px-4 rounded-full text-sm font-medium">Education: Diploma in Civil Engineering</span>
+                        </div>
+                        <div class="flex gap-4 justify-center">
+                            <a href="https://drive.google.com/drive/folders/11Qn_mtuL9yoK_gCi2a83vz1AuAiFj9ha?usp=sharing" target="_blank" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:border-purple-500 hover:text-purple-500 transition-all duration-300">View Video CV</a>
+                            <a href="https://drive.google.com/drive/folders/10_w7fkoTucHP-gtkGOb4UmZrnoTKzBO6?usp=sharing" target="_blank" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:border-purple-500 hover:text-purple-500 transition-all duration-300">Download Resume</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute top-0 right-0 wave-animation opacity-10">
+                <svg width="300" height="200" viewBox="0 0 300 200">
+                    <path d="M0,100 Q75,50 150,80 T300,70 L300,0 L0,0 Z" fill="url(#gradient2)"/>
+                    <defs>
+                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+
+        <section id="services" class="py-16 bg-on-theme">
+            <h2 class="text-4xl font-bold color-on-theme text-center mb-12 fade-in">Services I Offer</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
+                <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Rebarshop Drawing & BBS</h3>
+                    <p class="text-gray-600">Bar lists, cover checks, lap & anchor details, shop-ready BBS.</p>
+                </div>
+                <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                    <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl">✏️</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">2D Floor Plan</h3>
+                    <p class="text-gray-600">Layered, dimensioned and site-friendly floor plans in AutoCAD.</p>
+                </div>
+                <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Tekla Structures</h3>
+                    <p class="text-gray-600">Assembly and single-part shop drawings ready for fabrication.</p>
+                </div>
+                <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl">📐</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Rebar Takeoff</h3>
+                    <p class="text-gray-600">Accurate material takeoff with bar mapping and marks.</p>
+                </div>
+                <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                    <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Estimating with Excel</h3>
+                    <p class="text-gray-600">Templates, cost codes, and linked sheets for quick adjustments.</p>
+                </div>
+                <div class="floating-card bg-card-on-theme p-8 rounded-2xl text-center fade-in">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl">🎨</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">SketchUp 3D & V-Ray</h3>
+                    <p class="text-gray-600">3D models and realistic renders for visual approvals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 bg-on-theme">
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold color-on-theme mb-4 fade-in">Technical Skills</h2>
+                <p class="text-gray-600 mb-12 fade-in">Software and tools I use to deliver professional results</p>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in">AutoCAD</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 100ms">Tekla Structures</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 200ms">SketchUp</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 300ms">V-Ray</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 400ms">Microsoft Excel</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 500ms">Bluebeam</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 600ms">Rebar Detailing</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 700ms">BBS Creation</span>
+                    <span class="bg-blue-200 text-blue-800 py-2 px-6 rounded-full font-medium shadow-lg fade-in" style="animation-delay: 800ms">Quantity Takeoff</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-16 bg-on-theme">
+            <h2 class="text-4xl font-bold color-on-theme text-center mb-12 fade-in">Project Gallery</h2>
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
+            </div>
+            <div class="text-center mt-8 fade-in">
+                <a class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105" href="https://drive.google.com/drive/folders/1v_619B-_rbveJ2b73I_CCmF2LTeH1Iim?usp=drive_link" target="_blank">View All Projects</a>
+            </div>
+        </section>
+
+        <section id="contact" class="min-h-screen py-20 flex items-center justify-center bg-gray-900 text-white relative overflow-hidden">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="slide-in-left">
+                        <h2 class="text-5xl font-bold mb-6">Let's Create Something Amazing</h2>
+                        <p class="text-gray-300 text-lg mb-8">Ready to bring your vision to life? I'd love to hear about your project and explore how we can work together.</p>
+                        
+                        <div class="floating-card bg-gray-800 p-6 rounded-2xl space-y-4">
+                            <a href="mailto:sazzad.civileng1@gmail.com" class="flex items-center gap-4 group cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white">📧</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-400 group-hover:text-white transition-colors duration-300">Email</h4>
+                                    <p class="text-gray-400 group-hover:text-white transition-colors duration-300">sazzad.civileng1@gmail.com</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.linkedin.com/in/md-sazzad-hossain-9311b8277" target="_blank" class="flex items-center gap-4 group cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                                <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white">
+                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                        <rect x="2" y="9" width="4" height="12"></rect>
+                                        <circle cx="4" cy="4" r="2"></circle>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-400 group-hover:text-white transition-colors duration-300">Let's Connect</h4>
+                                    <p class="text-gray-400 underline group-hover:text-white transition-colors duration-300">LinkedIn Profile</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="slide-in-right text-center">
+                        <div class="floating-card bg-card-on-theme text-gray-800 p-8 rounded-3xl relative" style="z-index: 20;">
+                            <h3 class="text-2xl font-semibold mb-6 color-on-theme">Get in Touch</h3>
+                            <div class="space-y-4">
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sazzad.civileng1@gmail.com&su=Collaboration%20Request%20from%20Website&body=Hello%20Sazzad,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20opportunity%20with%20you."
+                                   class="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-4 rounded-lg font-semibold w-full block hover:shadow-lg transition-all duration-300 hover:scale-105"
+                                   target="_blank">
+                                    Send Email
+                                </a>
+                                <a href="https://www.linkedin.com/in/md-sazzad-hossain-9311b8277"
+                                   class="border border-gray-300 py-4 rounded-lg font-semibold w-full block transition-colors duration-300 hover:border-blue-500 text-gray-700 hover:text-blue-500"
+                                   target="_blank">
+                                    Connect on LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-0 left-0 wave-animation">
+                <svg width="500" height="200" viewBox="0 0 500 200" class="opacity-10">
+                    <path d="M0,100 Q125,50 250,80 T500,70 L500,200 L0,200 Z" fill="url(#gradient3)"/>
+                    <defs>
+                        <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p class="muted text-center py-8 text-gray-400">Designed & Built by Md Sazzad Hossain — Rebarshop Expert</p>
+        <p class="text-center py-8 text-gray-400 bg-on-theme">Designed & Built by Md Sazzad Hossain — Rebarshop Expert</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for scroll animations
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
-
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -553,12 +530,11 @@
                     }
                 });
             }, observerOptions);
-
             document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
                 observer.observe(el);
             });
 
-            // ---------- EDIT YOUR PROJECTS HERE ----------
+            // Dynamically create project cards
             const projects = [
                 {
                     title:'Rebarshop Drowing',
@@ -579,10 +555,9 @@
                     link:'https://drive.google.com/file/d/1ha_CFElv7KbnNuD74kZv8kRL5uSKQSdU/view?usp=sharing'
                 }
             ];
-            // ---------------------------------------------
             const grid = document.getElementById('projectsGrid');
             if (grid) {
-                projects.forEach(p=>{
+                projects.forEach(p => {
                     const div = document.createElement('div');
                     div.className = 'floating-card bg-card-on-theme p-4 rounded-2xl fade-in';
                     div.innerHTML = `<a href="${p.link}" target="_blank" class="block group">
@@ -602,41 +577,65 @@
             const mobileNav = document.getElementById('mobileNav');
             hamburger.addEventListener('click', () => {
                 mobileNav.classList.toggle('hidden');
-                document.body.classList.toggle('overflow-hidden');
+                mobileNav.setAttribute('aria-hidden', mobileNav.classList.contains('hidden'));
             });
             mobileNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileNav.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
+                    mobileNav.setAttribute('aria-hidden', 'true');
                 });
             });
 
-            // Theme Toggle
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            themeToggleBtn.addEventListener('click', () => {
-                document.body.classList.toggle('dark-theme');
-                if (document.body.classList.contains('dark-theme')) {
-                    themeToggleBtn.textContent = 'Light Mode';
+            // Dark/Light theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const setNavTheme = (isDark) => {
+                if (isDark) {
+                    mobileNav.classList.remove('bg-white', 'text-gray-800');
+                    mobileNav.classList.add('dark-theme-nav', 'text-white');
+                    mobileNav.querySelectorAll('a').forEach(a => a.classList.add('text-white'));
                 } else {
-                    themeToggleBtn.textContent = 'Dark Mode';
+                    mobileNav.classList.remove('dark-theme-nav', 'text-white');
+                    mobileNav.classList.add('bg-white', 'text-gray-800');
+                    mobileNav.querySelectorAll('a').forEach(a => a.classList.remove('text-white'));
                 }
+            };
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-theme');
+                themeToggle.textContent = 'Light Mode';
+                setNavTheme(true);
+            } else {
+                setNavTheme(false);
+            }
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                const isDarkMode = body.classList.contains('dark-theme');
+                if (isDarkMode) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = 'Light Mode';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = 'Dark Mode';
+                }
+                setNavTheme(isDarkMode);
             });
+            
+            // Preloader logic
+            const loader = document.getElementById('blueprint-loader');
+            const intro = document.getElementById('bp-intro');
+            const viewProjectsBtn = intro.querySelector('button');
+
+            setTimeout(() => {
+                intro.classList.add('show');
+            }, 2200);
+
+            const hideLoader = () => {
+                loader.classList.add('bp-out');
+            };
+
+            setTimeout(hideLoader, 4000);
+            viewProjectsBtn.addEventListener('click', hideLoader);
         });
-    </script>
-    <script>
-      (function() {
-        const overlay = document.getElementById('blueprint-loader');
-        const intro = document.getElementById('bp-intro');
-        const hero = document.getElementById('hero-intro');
-        function prepPaths(){
-          overlay.querySelectorAll('.bp-line').forEach(p=>{
-            try { const len=p.getTotalLength(); p.style.strokeDasharray=len; p.style.strokeDashoffset=len; } catch(e){}
-          });
-        }
-        function showIntro(){ setTimeout(()=>intro.classList.add('show'),0); }
-        function revealSite(){ if(hero) hero.classList.add('hero-show'); overlay.classList.add('bp-out'); setTimeout(()=>overlay.remove(),600); }
-        window.addEventListener('load',()=>{ prepPaths(); showIntro(); setTimeout(revealSite,3200); });
-      })();
     </script>
 </body>
 </html>
